@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\blogs",
+    "\\blogs\\static",
+    "\\blogs\\static\\blogs",
+    "\\blogs\\static\\blogs\\media",
+    "\\sentiment"
+  ],
+  "SelectedNode": "\\sentiment\\settings.py",
+  "PreviewInSolutionExplorer": false
+}

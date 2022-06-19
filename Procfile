@@ -1,2 +1,2 @@
-web:gunicorn sentiment.wsgi:application --log-file –
+web:gunicorn sentiment.wsgi
 release:python manage.py migrate

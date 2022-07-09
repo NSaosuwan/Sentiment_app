@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\blogs",
+    "\\blogs\\static",
     "\\blogs\\static\\blogs",
     "\\blogs\\static\\blogs\\media",
     "\\sentiment",
     "\\templates"
   ],
-  "SelectedNode": "\\sentiment\\settings.py",
+  "SelectedNode": "\\requirements.txt",
   "PreviewInSolutionExplorer": false
 }

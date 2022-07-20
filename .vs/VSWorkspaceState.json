@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\blogs",
-    "\\blogs\\static\\blogs",
-    "\\blogs\\static\\blogs\\media",
-    "\\sentiment",
-    "\\templates"
+    ""
   ],
-  "SelectedNode": "\\requirement.txt",
+  "SelectedNode": "\\requirements.txt",
   "PreviewInSolutionExplorer": false
 }

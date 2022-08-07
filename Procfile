@@ -1,3 +1,2 @@
-web:python manage.py collectstatic --no-input;
-web:gunicorn sentiment.wsgi
+web:gunicorn sentiment.wsgi:appilcation --log-file-
 release:python manage.py migrate

@@ -5,6 +5,7 @@ from .forms import FormComment
 from io import BytesIO
 import base64
 from .models import Comment
+#{% load static %}
 
 #HTTP response
 from django.http import HttpResponse
@@ -94,25 +95,24 @@ def webhook(request):
  #   department=request.POST.get("Department")
   #  date = request.POST.get("Date")
 
-
     #ML
     clean_text = [clean_msg(detail)]
     tokens_list = [split_word(txt) for txt in clean_text]
 
-    tfidf_vectorizer =  pickle.load(open(r"C:\Users\Acer\OneDrive\เดสก์ท็อป\Django Demo\sentiment\blogs\tfidf_vectorizer.sav",'rb'))
+    tfidf_vectorizer =  pickle.load(open(r"tfidf_vectorizer.sav",'rb'))
 
     tfidf_vector= tfidf_vectorizer.transform(tokens_list)
     tfidf_array = np.array(tfidf_vector.todense())
 
     #แปลงเป็น DataFrame เพื่อง่ายแก่การอ่าน
     df = pd.DataFrame(tfidf_array,columns=tfidf_vectorizer.get_feature_names_out())
-    SVM = pickle.load(open(r"C:\Users\Acer\OneDrive\เดสก์ท็อป\Django Demo\sentiment\blogs\svm.sav",'rb'))
+    SVM = pickle.load(open(r"svm.sav",'rb'))
     
     y_pred = SVM.predict(df)
 
     Class=y_pred[0]
     
-    SGD = pickle.load(open(r"C:\Users\Acer\OneDrive\เดสก์ท็อป\Django Demo\sentiment\blogs\SGD.sav",'rb')) 
+    SGD = pickle.load(open(r"SGD.sav",'rb')) 
     Y_pred = SGD.predict(df)
 
     aspect = Y_pred[0] 

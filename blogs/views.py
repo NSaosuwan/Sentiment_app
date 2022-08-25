@@ -94,25 +94,37 @@ def webhook(request):
  #   detail=request.POST.get("Detail")
  #   department=request.POST.get("Department")
   #  date = request.POST.get("Date")
+    
+    s3_file = s3fs.S3FileSystem(key='AKIAZCYHPGBE6FJD7H5Q',
+                           secret='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',
+                                     
+               client_kwargs=dict(endpoint_url="https://s3.amazonaws.com"),anon=True)
+    
+    with s3_file.open('django-sentiment/static/blogs/media/tfidf_vectorizer.sav', 'rb') as tf:
+         tfidf_vectorizer = pickle.load(tf)
+
+
+    with s3_file.open('django-sentiment/static/blogs/media/svm.sav', 'rb') as svm:
+         SVM = pickle.load(svm)
+
+   
+    with s3_file.open('django-sentiment/static/blogs/media/SGD.sav', 'rb') as sgd:
+         SGD= pickle.load(sgd)
 
     #ML
     clean_text = [clean_msg(detail)]
     tokens_list = [split_word(txt) for txt in clean_text]
-
-    tfidf_vectorizer =  pickle.load(open(r"tfidf_vectorizer.sav",'rb'))
 
     tfidf_vector= tfidf_vectorizer.transform(tokens_list)
     tfidf_array = np.array(tfidf_vector.todense())
 
     #แปลงเป็น DataFrame เพื่อง่ายแก่การอ่าน
     df = pd.DataFrame(tfidf_array,columns=tfidf_vectorizer.get_feature_names_out())
-    SVM = pickle.load(open(r"svm.sav",'rb'))
     
     y_pred = SVM.predict(df)
 
     Class=y_pred[0]
     
-    SGD = pickle.load(open(r"SGD.sav",'rb')) 
     Y_pred = SGD.predict(df)
 
     aspect = Y_pred[0] 
